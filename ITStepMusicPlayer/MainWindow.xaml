@@ -1,0 +1,77 @@
+﻿<Window x:Class="ITStepMusicPlayer.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ITStepMusicPlayer"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="600" Width="800">
+    
+    <Grid>
+        
+        <Grid.RowDefinitions>
+            <RowDefinition Height="0,1*"></RowDefinition>
+            <RowDefinition Height="0,7*"></RowDefinition>
+            <RowDefinition Height="0,2*"></RowDefinition>
+        </Grid.RowDefinitions>
+        
+        <!-- Search and buttons -->
+        <Grid Row="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="0,4*"></ColumnDefinition>
+                <ColumnDefinition Width="0,6*"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            
+            <!-- Search -->
+            <Grid Column="0"></Grid>
+            <!-- Buttons -->
+            <Grid Column="1">
+                
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="0,33*"></ColumnDefinition>
+                    <ColumnDefinition Width="0,33*"></ColumnDefinition>
+                    <ColumnDefinition Width="0,33*"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                
+                <Grid Column="0"></Grid>
+                <Grid Column="1"></Grid>
+                <Grid Column="2"></Grid>
+                
+            </Grid>
+            
+        </Grid>
+        <!-- Multimedia -->
+        <Grid Row="1">
+            
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="0,35*"></ColumnDefinition>
+                <ColumnDefinition Width="0,65*"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            
+            <!-- Poster and description -->
+            <Grid Column="0">
+                
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="0,7*"></RowDefinition>
+                    <RowDefinition Height="0,3*"></RowDefinition>
+                </Grid.RowDefinitions>
+                
+                <!-- Poster -->
+                <Grid Row="0"></Grid>
+                <!-- Description -->
+                <Grid Row="1"></Grid>
+                
+            </Grid>
+            <!-- Track list -->
+            <Grid Column="1">
+                
+            </Grid>
+            
+        </Grid>
+        <!-- Track controls -->
+        <Grid Row="2">
+            
+        </Grid>
+        
+    </Grid>
+</Window>
