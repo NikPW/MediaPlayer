@@ -91,7 +91,15 @@
         <None Include="packages.config" />
     </ItemGroup>
     <ItemGroup>
-      <Resource Include="DefaultTrackPoster.jpg" />
+      <Resource Include="Resources\DefaultTrackPoster.jpg" />
+    </ItemGroup>
+    <ItemGroup>
+      <Resource Include="Resources\AddFavorite.png" />
+      <Resource Include="Resources\Backward.png" />
+      <Resource Include="Resources\Frontward.png" />
+      <Resource Include="Resources\Play.png" />
+      <Resource Include="Resources\Search.png" />
+      <Resource Include="Resources\SoundOn.png" />
     </ItemGroup>
     <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

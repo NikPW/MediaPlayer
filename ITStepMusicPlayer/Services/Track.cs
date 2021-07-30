@@ -21,7 +21,10 @@ namespace ITStepMusicPlayer.Services {
         public Image Poster { get; }
         public DateTime ReleaseDate { get; }
         public Author Author { get; }
-        private MediaPlayer _player;
+        public bool IsPlay { get; private set; }
+
+        public MediaPlayer Player { get; }
+
 
         #endregion
         #region Constructors
@@ -47,9 +50,7 @@ namespace ITStepMusicPlayer.Services {
 
                 Poster.Source = bitmap;
             }
-            catch {
-                Poster.Source = new BitmapImage(new Uri("pack://application:,,,/DefaultTrackPoster.jpg", UriKind.Relative));
-            }
+            catch {}
 
             if (file.Tag.DateTagged.HasValue) {
                 ReleaseDate = file.Tag.DateTagged.Value;
@@ -59,19 +60,30 @@ namespace ITStepMusicPlayer.Services {
             }
 
             Author = new Author(file.Tag.FirstAlbumArtist);
-            _player = new MediaPlayer();
-            _player.Open(new Uri("file:///" + Reference));
+            Player = new MediaPlayer();
+            Player.Open(new Uri("file:///" + Reference));
         }
 
         #endregion
         #region Methods
 
-        public void Play() => _player.Play();
-        public void Pause() => _player.Pause();
-        public void Stop() => _player.Stop();
-        public void Seek(long value) {
+        public void Play() {
+            Player.Play();
+            IsPlay = true;
+        }
+
+        public void Pause() {
+            Player.Pause();
+            IsPlay = false;
+        }
+
+        public void Stop() {
+            Player.Stop();
+            IsPlay = false;
+        }
+        public void Seek(TimeSpan t) {
             Stop();
-            _player.Position = new TimeSpan(value);
+            Player.Position = t;
             Play();
         }
 

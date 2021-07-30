@@ -29,14 +29,16 @@
             <Grid Column="1">
                 
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="0,33*"></ColumnDefinition>
-                    <ColumnDefinition Width="0,33*"></ColumnDefinition>
-                    <ColumnDefinition Width="0,33*"></ColumnDefinition>
+                    <ColumnDefinition Width="0,25*"></ColumnDefinition>
+                    <ColumnDefinition Width="0,25*"></ColumnDefinition>
+                    <ColumnDefinition Width="0,25*"></ColumnDefinition>
+                    <ColumnDefinition Width="0,25*"></ColumnDefinition>
                 </Grid.ColumnDefinitions>
                 
                 <Grid Column="0"></Grid>
                 <Grid Column="1"></Grid>
                 <Grid Column="2"></Grid>
+                <Grid Column="3"></Grid>
                 
             </Grid>
             
@@ -60,7 +62,7 @@
                 
                 <!-- Poster -->
                 <Grid Row="0">
-                    <Image x:Name="MainPoster"></Image>
+                    <Image x:Name="MainPoster" Source="pack://application:,,,/Resources/DefaultTrackPoster.jpg"></Image>
                 </Grid>
                 <!-- Description -->
                 <Grid Row="1"></Grid>
@@ -106,7 +108,9 @@
             
             <!-- Track seek slider -->
             <Grid Grid.Row="0">
-                <Slider x:Name="TrackProgressSlider"></Slider>
+                <Slider x:Name="TrackProgressSlider"
+                        Value="{Binding Path=Volume, Mode=TwoWay, ElementName=media}"
+                        MouseLeftButtonUp="TrackProgressSlider_MouseLeftButtonUp"></Slider>
             </Grid>
             <!-- Track name, control buttons and volume control -->
             <Grid Grid.Row="1">
@@ -132,11 +136,17 @@
                     </Grid.ColumnDefinitions>
                     
                     <Button Grid.Column="0">
-                        <Image x:Name="Add"></Image>
+                        <Image x:Name="AddFavorite" Source="pack://application:,,,/Resources/AddFavorite.png"></Image>
                     </Button>
-                    <Button Grid.Column="1"></Button>
-                    <Button Grid.Column="2"></Button>
-                    <Button Grid.Column="3"></Button>
+                    <Button Grid.Column="1">
+                        <Image x:Name="SeekBackward" Source="pack://application:,,,/Resources/Backward.png"></Image>
+                    </Button>
+                    <Button Grid.Column="2" Click="PlayButton_OnClick">
+                        <Image x:Name="Play" Source="pack://application:,,,/Resources/Play.png"></Image>
+                    </Button>
+                    <Button Grid.Column="3">
+                        <Image x:Name="SeekFrontward" Source="pack://application:,,,/Resources/Frontward.png"></Image>
+                    </Button>
                 </Grid>
                 <!-- Volume control -->
                 <Grid Grid.Column="2">
