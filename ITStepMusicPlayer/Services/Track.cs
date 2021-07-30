@@ -1,6 +1,7 @@
 ﻿// Davlatov "NikPW" Farrukh
 
 using System;
+using System.Drawing;
 using System.IO;
 using System.Windows.Controls;
 using System.Linq;
@@ -20,9 +21,9 @@ namespace ITStepMusicPlayer.Services {
         public string Genre { get; }
         public Image Poster { get; }
         public DateTime ReleaseDate { get; }
-        public Author Author { get; }
+        public string Author { get; }
+        public string Album { get; }
         public bool IsPlay { get; private set; }
-
         public MediaPlayer Player { get; }
 
 
@@ -50,7 +51,10 @@ namespace ITStepMusicPlayer.Services {
 
                 Poster.Source = bitmap;
             }
-            catch {}
+            catch {
+                Poster = new Image();
+                Poster.Source = new BitmapImage(new Uri("pack://application:,,,/Resources/DefaultTrackPoster.jpg"));
+            }
 
             if (file.Tag.DateTagged.HasValue) {
                 ReleaseDate = file.Tag.DateTagged.Value;
@@ -59,7 +63,8 @@ namespace ITStepMusicPlayer.Services {
                 ReleaseDate = new DateTime(1970, 1, 1);
             }
 
-            Author = new Author(file.Tag.FirstAlbumArtist);
+            Author = file.Tag.FirstAlbumArtist;
+            Album = file.Tag.Album;
             Player = new MediaPlayer();
             Player.Open(new Uri("file:///" + Reference));
         }
@@ -71,12 +76,10 @@ namespace ITStepMusicPlayer.Services {
             Player.Play();
             IsPlay = true;
         }
-
         public void Pause() {
             Player.Pause();
             IsPlay = false;
         }
-
         public void Stop() {
             Player.Stop();
             IsPlay = false;

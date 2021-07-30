@@ -10,7 +10,7 @@ namespace ITStepMusicPlayer.Services.Interfaces {
         string Genre { get; }
         Image Poster { get; }
         DateTime ReleaseDate { get; }
-        Author Author { get; }
+        string Author { get; }
         
     }
 }

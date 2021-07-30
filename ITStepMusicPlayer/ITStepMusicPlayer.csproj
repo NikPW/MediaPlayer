@@ -56,8 +56,11 @@
             <Generator>MSBuild:Compile</Generator>
             <SubType>Designer</SubType>
         </ApplicationDefinition>
+        <Compile Include="Services\AddTracks.cs" />
+        <Compile Include="Services\Album.cs" />
         <Compile Include="Services\Author.cs" />
         <Compile Include="Services\Interfaces\IMedia.cs" />
+        <Compile Include="Services\SearchTracks.cs" />
         <Compile Include="Services\Track.cs" />
         <Page Include="MainWindow.xaml">
             <Generator>MSBuild:Compile</Generator>
