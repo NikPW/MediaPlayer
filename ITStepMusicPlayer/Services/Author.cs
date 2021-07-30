@@ -1,4 +1,5 @@
-﻿
+﻿// Davlatov "NikPW" Farrukh
+
 namespace ITStepMusicPlayer.Services {
     public class Author {
         

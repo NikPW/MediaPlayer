@@ -1,4 +1,6 @@
-﻿using System;
+﻿// Davlatov "NikPW" Farrukh
+
+using System;
 using System.Windows.Controls;
 
 namespace ITStepMusicPlayer.Services.Interfaces {
