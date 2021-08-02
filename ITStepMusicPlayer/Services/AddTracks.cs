@@ -16,28 +16,14 @@ namespace ITStepMusicPlayer.Services {
                 tracks.Add(new Track(i));
             }
 
-            for (int i = 0; i < tracks.Count; ++i) {
-                for (int j = 0; j < albums.Count; ++j) {
-                    if (albums[j].AlbumName.Equals(tracks[i].Album)) {
-                        albums[j].Tracks.Add(tracks[i]);
-                    }
-                    else {
-                        int indexOfLastSlash = tracksDirectories[i].LastIndexOf('/');
-                        string albumDirectory = tracksDirectories[i].Substring(0, indexOfLastSlash);
-                        albums.Add(new Album(albumDirectory));
-                    }
-                }
+            foreach (var i in tracksDirectories) {
+                int b = i.LastIndexOf(@"\");
+                string a = tracksDirectories[0].Substring(0, b);
+                albums.Add(new Album(a));
             }
-
+            
             foreach (var i in albums) {
-                for (int j = 0; j < authors.Count; ++j) {
-                    if (authors[j].Name.Equals(i.Author)) {
-                        authors[j].Albums.Add(i);
-                    }
-                    else {
-                        authors.Add(new Author(i.Author, i));
-                    }
-                }
+                authors.Add(new Author(i.Author, i));
             }
 
             return authors;

@@ -14,6 +14,7 @@ namespace ITStepMusicPlayer.Services {
 
         public Author(string authorName, Album album) {
             Name = authorName;
+            Albums = new List<Album>();
             Albums.Add(album);
         }
         

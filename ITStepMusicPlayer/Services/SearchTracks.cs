@@ -14,21 +14,27 @@ namespace ITStepMusicPlayer.Services
         {
             List<string> totalFile = new List<string>{};
 
-            string dirName = @"C:\Users\" + Environment.UserName;
+            // string dirName = @"C:\Users\" + Environment.UserName;
+            string dirName = @"D:\Music";
             
             if (Directory.Exists(dirName))
             {
                 string[] dirs = Directory.GetDirectories(dirName);
                 foreach (string s in dirs)
                 {
-                    
+                    if (s.Contains('.')) continue;
                         try
                         {
                             string[] directories = Directory.GetDirectories(s, ".", SearchOption.AllDirectories);
                             foreach (string d in directories)
                             {
+                                if (d.Contains('.')) continue;
 
-                                string[] files = Directory.GetFiles(d, ".");
+                                string[] files;
+                                try {
+                                    files = Directory.GetFiles(d, ".");
+                                }
+                                catch { continue; }
                                 foreach (string file in files)
                                 {
                                     
@@ -48,21 +54,26 @@ namespace ITStepMusicPlayer.Services
 
                 }
             }
-
+/*
             dirName = @"D:\";
             if (Directory.Exists(dirName))
             {
                 string[] dirs = Directory.GetDirectories(dirName);
                 foreach (string s in dirs)
                 {
-                    
+                    if (s.Contains('.')) continue;
                     try
                     {
                         string[] directories = Directory.GetDirectories(s, ".", SearchOption.AllDirectories);
                         foreach (string d in directories)
                         {
+                            if (d.Contains('.')) continue;
+                            string[] files;
+                            try {
+                                files = Directory.GetFiles(d, ".");
+                            }
+                            catch { continue; }
 
-                            string[] files = Directory.GetFiles(d, ".");
                             foreach (string file in files)
                             {
                                     
@@ -82,7 +93,7 @@ namespace ITStepMusicPlayer.Services
 
                 }
             }
-            
+            */
             return totalFile;
         }
 

@@ -1,4 +1,6 @@
 ﻿// Davlatov "NikPW" Farrukh
+// Евгений, мы старались. Очень. Осталось немного, но вышло - как вышло. Ещё допилим. На оценку плевать.
+// Пока есть поддержка только одного альбома, который надо пихать в директорию D:\Music
 
 using System;
 using System.Collections.Generic;
@@ -17,6 +19,7 @@ namespace ITStepMusicPlayer {
         #region Fields
 
         private List<Author> _authors;
+        private Author _currentAuthor;
         private Track _currentTrack;
 
         #endregion
@@ -44,15 +47,38 @@ namespace ITStepMusicPlayer {
                 _currentTrack.Play();
             }
 
+            TrackNameLabel.Text = _currentTrack.TrackName;
+
             TPSUpdateEvent?.Invoke();
         }
         private void TrackPlayButton_OnClick(object sender, RoutedEventArgs e) {
+
+            if (((TextBlock) (((Button) sender).Content)).Text == "Исполнители") {
+                List<TrackLabel> tl = new List<TrackLabel>();
+
+                foreach (var i in _authors) {
+                    tl.Add(new TrackLabel() { Name = i.Name });
+                }
+
+                TrackListXaml.ItemsSource = tl;
+            }
+            else if (((TextBlock) (((Button) sender).Content)).Text == "Все треки") {
+                List<TrackLabel> tl = new List<TrackLabel>();
+
+                foreach (var i in _authors[0].Albums[0].Tracks) {
+                    tl.Add(new TrackLabel() { Name = i.TrackName });
+                }
+
+                TrackListXaml.ItemsSource = tl;
+            }
+
             foreach (var i in _authors[0].Albums[0].Tracks) {
                 i.Stop();
             }
             foreach (var i in _authors[0].Albums[0].Tracks) {
                 if (((TextBlock)(((Button) sender).Content)).Text == i.TrackName) {
                     _currentTrack = i;
+                    TrackNameLabel.Text = _currentTrack.TrackName;
                     TPSUpdateEvent?.Invoke();
                     i.Play();
                     return;
@@ -70,30 +96,6 @@ namespace ITStepMusicPlayer {
         }
         private void SliderVolumePosition_ValueChanged(object sender, RoutedEventArgs e) {
             _currentTrack.Player.Volume = TrackVolumeSlider.Value;
-        }
-        
-
-        #endregion
-        #region Delegates
-
-        public delegate void TPSDelegate();
-
-        #endregion
-        #region Events
-
-        public event TPSDelegate TPSUpdateEvent;
-
-        #endregion
-        #region Methods
-
-        public void TPSUpdate() {
-            TrackProgressSlider.Maximum = _currentTrack.Player.NaturalDuration.TimeSpan.TotalSeconds;
-        }
-
-        #endregion
-
-        private void AddFavorite_OnClick(object sender, RoutedEventArgs e) {
-            throw new NotImplementedException();
         }
         private void BackwardTrack_OnClick(object sender, RoutedEventArgs e) {
             _currentTrack.Stop();
@@ -136,7 +138,6 @@ namespace ITStepMusicPlayer {
                 _currentTrack.Player.Volume = 0;
             }
         }
-
         private void AuthorsButton_OnClick(object sender, RoutedEventArgs e) {
 
             List<TrackLabel> tl = new List<TrackLabel>();
@@ -147,6 +148,35 @@ namespace ITStepMusicPlayer {
 
             TrackListXaml.ItemsSource = tl;
         }
+        private void TracksButton_OnClick(object sender, RoutedEventArgs e) {
+            
+            List<TrackLabel> tl = new List<TrackLabel>();
+
+            foreach (var i in _authors[0].Albums[0].Tracks) {
+                tl.Add(new TrackLabel() { Name = i.TrackName });
+            }
+
+            TrackListXaml.ItemsSource = tl;
+        }
+
+        #endregion
+        #region Delegates
+
+        public delegate void TPSDelegate();
+
+        #endregion
+        #region Events
+
+        public event TPSDelegate TPSUpdateEvent;
+
+        #endregion
+        #region Methods
+
+        public void TPSUpdate() {
+            TrackProgressSlider.Maximum = _currentTrack.Player.NaturalDuration.TimeSpan.TotalSeconds;
+        }
+
+        #endregion
     }
     public class TrackLabel {
         

@@ -18,7 +18,6 @@ namespace ITStepMusicPlayer.Services {
         #region Properties
 
         public string Reference { get; set; }
-        public string AuthorName { get; }
         public string AlbumName { get; }
         public string Genre { get; }
         public Image Poster { get; }
@@ -60,7 +59,7 @@ namespace ITStepMusicPlayer.Services {
             }
 
             AlbumName = di.Name;
-            AuthorName = file.Tag.FirstAlbumArtist;
+            Author = file.Tag.FirstAlbumArtist;
         }
         
         #endregion
